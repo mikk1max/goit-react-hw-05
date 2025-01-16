@@ -1,0 +1,56 @@
+.detailsContainer {
+    display: flex;
+    gap: 20px;
+}
+
+.imgContainer {
+    margin: 0;
+
+    & img {
+        width: 100%;
+        min-width: 174px;
+    }
+}
+
+.detailsInfoBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.addInfoList {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+.addInfoListItem {
+    background-color: #003580;
+    color: #f2f6fa;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    border-radius: 2rem;
+    min-width: 6rem;
+
+    & a {
+        display: block;
+        padding: 10px 30px;
+    }
+}
+
+.backLink {
+    display: inline-flex;
+    color: #003580;
+    font-size: 1.2rem;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+
+    & a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,0 +1,24 @@
+.castContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px auto;
+}
+
+.castCard {
+    width: calc((100% - 5 * 10px) / 6);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.castImg {
+}
+
+.castInfoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
