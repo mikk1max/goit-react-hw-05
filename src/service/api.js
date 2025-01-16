@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYzBiNmNiMDdiYWM2Yjg4OThmOWZhYzA1MjEyYzNlOSIsIm5iZiI6MTczNjg4Mzk4Mi4zMDcwMDAyLCJzdWIiOiI2Nzg2YmYwZTFmYzBlYzdmMDg3YjFhYTUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Xee-BHU3Ngj2ARUbGtaGBU32zoQMu9pS9il8tU9MKxg";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 axios.defaults.baseURL = "https://api.themoviedb.org/3/";
 
