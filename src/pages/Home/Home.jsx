@@ -21,7 +21,9 @@ const Home = () => {
         const data = await getPopularMovies(page);
         setMovies(data);
       } catch (error) {
-        toast.error(`Something went wrong!\n${error}`, {position: "top-right"});
+        toast.error(`Something went wrong!\n${error}`, {
+          position: "top-right",
+        });
       } finally {
         setIsLoading(false);
       }
@@ -32,27 +34,28 @@ const Home = () => {
   return (
     <div>
       {isLoading && <Loader />}
-      {/* <h2 style={{ fontSize: 36 }}>Most Popular Movies</h2> */}
-      <ul className={s.moviesList}>
-        {movies.results?.map((movie) => (
-          <li key={movie.id} className={s.movieItem}>
-            <div className={s.imgContainer}>
-              <img
-                src={
-                  movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                    : "/no-image.png"
-                }
-              />
-            </div>
-            <div className={s.movieTitle}>
-              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                {movie.title}
-              </Link>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {!isLoading && (
+        <ul className={s.moviesList}>
+          {movies.results?.map((movie) => (
+            <li key={movie.id} className={s.movieItem}>
+              <div className={s.imgContainer}>
+                <img
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                      : "/no-image.png"
+                  }
+                />
+              </div>
+              <div className={s.movieTitle}>
+                <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                  {movie.title}
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
       {!isLoading && (
         <ReactPaginate
           breakLabel="..."
