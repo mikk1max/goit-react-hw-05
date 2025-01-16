@@ -1,11 +1,15 @@
 import { format } from "date-fns";
 
-  export const getIdFromLocation = (location) => {
-    return location.pathname
-      .split(/\D+/)
-      .filter((num) => num !== "")
-      .join("");
-  };
+export const getIdFromLocation = (location) => {
+  if (!location || !location.pathname) {
+    console.error("Invalid location object:", location);
+    return null;
+  }
+
+  const match = location.pathname.match(/\/movies\/(\d+)/);
+  return match ? match[1] : null;
+};
+
 
   export const getYearFromDate = (date) => {
     try {

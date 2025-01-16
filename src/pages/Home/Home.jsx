@@ -2,36 +2,72 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { getPopularMovies } from "../../service/api";
 import { Link, useLocation } from "react-router-dom";
-
-import s from "./Home.module.css"
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import s from "./Home.module.css";
+import ReactPaginate from "react-paginate";
+import toast from "react-hot-toast";
+import Loader from "../../components/Loader/Loader";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
-  const location = useLocation()
+  const location = useLocation();
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getPopularMovies();
-
-        setMovies(data.results);
+        setIsLoading(true);
+        const data = await getPopularMovies(page);
+        setMovies(data);
       } catch (error) {
-        console.log(error);
+        toast.error(`Something went wrong!\n${error}`, {position: "top-right"});
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
-  }, []);
+  }, [page]);
 
   return (
     <div>
-      <h2>Trending today</h2>
+      {isLoading && <Loader />}
+      {/* <h2 style={{ fontSize: 36 }}>Most Popular Movies</h2> */}
       <ul className={s.moviesList}>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`} state={{ from: location}}>{movie.title}</Link>
+        {movies.results?.map((movie) => (
+          <li key={movie.id} className={s.movieItem}>
+            <div className={s.imgContainer}>
+              <img
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                    : "/no-image.png"
+                }
+              />
+            </div>
+            <div className={s.movieTitle}>
+              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                {movie.title}
+              </Link>
+            </div>
           </li>
         ))}
       </ul>
+      {!isLoading && (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel={<GrFormNext size={36} />}
+          onPageChange={(event) => setPage(event.selected + 1)}
+          pageRangeDisplayed={5}
+          pageCount={movies?.total_pages || 1}
+          previousLabel={<GrFormPrevious size={36} />}
+          renderOnZeroPageCount={null}
+          containerClassName={s.pagination}
+          activeClassName={s.active}
+          disabledClassName={s.disabled}
+          forcePage={page - 1}
+        />
+      )}
     </div>
   );
 };

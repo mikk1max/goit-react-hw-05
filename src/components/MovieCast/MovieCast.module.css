@@ -12,9 +12,6 @@
     gap: 20px;
 }
 
-.castImg {
-}
-
 .castInfoBox {
     display: flex;
     flex-direction: column;

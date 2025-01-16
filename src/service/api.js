@@ -13,8 +13,14 @@ const options = {
   },
 };
 
-export const getPopularMovies = async () => {
-  const response = await axios.get("trending/movie/day", options);
+export const getPopularMovies = async (page) => {
+  const response = await axios.get("trending/movie/day", {
+    ...options,
+    params: {
+      ...options.params,
+      page: `${page}`,
+    },
+  });
   return response.data;
 };
 

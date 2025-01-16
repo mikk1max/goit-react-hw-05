@@ -5,6 +5,8 @@
 
 .imgContainer {
     margin: 0;
+    align-items: center;
+    display: flex;
 
     & img {
         width: 100%;
