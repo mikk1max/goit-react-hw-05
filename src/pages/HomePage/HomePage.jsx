@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import { getPopularMovies } from "../../service/api";
 import { Link, useLocation } from "react-router-dom";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import s from "./Home.module.css";
+import s from "./HomePage.module.css";
 import ReactPaginate from "react-paginate";
 import toast from "react-hot-toast";
 import Loader from "../../components/Loader/Loader";
 
-const Home = () => {
+const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const location = useLocation();
   const [page, setPage] = useState(1);
@@ -75,4 +75,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

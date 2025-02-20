@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { getMovieDetails } from "../../service/api";
+import { getMovieDetails } from "../../service/api.js";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Divider } from "@fluentui/react-divider";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-import s from "./MovieDetails.module.css";
-import { getIdFromLocation, getYearFromDate } from "../../service/helpers";
-import Loader from "../Loader/Loader";
-import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
+import s from "./MovieDetailsPage.module.css";
+import { getIdFromLocation, getYearFromDate } from "../../service/helpers.js";
+import Loader from "../../components/Loader/Loader.jsx";
+import NotFoundPage from "../NotFoundPage/NotFoundPage.jsx";
 
-const MovieDetails = () => {
+const MovieDetailsPage = () => {
   const location = useLocation();
   const [movieDetails, setMovieDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -100,4 +100,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default MovieDetailsPage;

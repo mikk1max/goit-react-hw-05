@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getMovieReviews } from "../../service/api";
-import { formatDate, getIdFromLocation } from "../../service/helpers";
+import { formatDate } from "../../service/helpers";
 import Loader from "../Loader/Loader";
 
 import s from "./MovieReviews.module.css";
 
 const MovieReviews = () => {
-  const location = useLocation();
   const [reviews, setReviews] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const movieId = getIdFromLocation(location);
+  const movieId = useParams().movieId;
 
   useEffect(() => {
     const fetchData = async () => {

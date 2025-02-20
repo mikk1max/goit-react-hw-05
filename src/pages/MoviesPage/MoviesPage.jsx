@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getMoviesByQuery } from "../../service/api";
 
-import s from "./Movies.module.css";
+import s from "./MoviesPage.module.css";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 
-const Movies = () => {
+const MoviesPage = () => {
   const location = useLocation();
   const [movies, setMovies] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -98,4 +98,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default MoviesPage;
