@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getMovieDetails } from "../../service/api.js";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { Divider } from "@fluentui/react-divider";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 import s from "./MovieDetailsPage.module.css";
-import { getIdFromLocation, getYearFromDate } from "../../service/helpers.js";
+import { getYearFromDate } from "../../service/helpers.js";
 import Loader from "../../components/Loader/Loader.jsx";
 import NotFoundPage from "../NotFoundPage/NotFoundPage.jsx";
 
 const MovieDetailsPage = () => {
   const location = useLocation();
+  const backLinkHref = useRef(location?.state?.from || "/");
+
   const [movieDetails, setMovieDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const movieId = getIdFromLocation(location);
+  const movieId = useParams().movieId;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,8 +36,6 @@ const MovieDetailsPage = () => {
 
   const getVotePercent = (value) => `${Math.round(value * 10)}%`;
 
-  const backLinkHref = location.state?.from || "/";
-
   return (
     <>
       {isLoading ? (
@@ -43,7 +43,7 @@ const MovieDetailsPage = () => {
       ) : movieDetails.title ? (
         <>
           <div className={s.backLink}>
-            <Link to={backLinkHref}>
+            <Link to={backLinkHref.current}>
               <IoMdArrowRoundBack size={28} color="#003580" />
               <span style={{ marginLeft: 5 }}>Back</span>
             </Link>
@@ -80,12 +80,12 @@ const MovieDetailsPage = () => {
 
           <ul className={s.addInfoList}>
             <li className={s.addInfoListItem}>
-              <Link to="cast" state={{ from: backLinkHref }}>
+              <Link to="cast" state={{ from: backLinkHref.current }}>
                 Cast
               </Link>
             </li>
             <li className={s.addInfoListItem}>
-              <Link to="reviews" state={{ from: backLinkHref }}>
+              <Link to="reviews" state={{ from: backLinkHref.current }}>
                 Reviews
               </Link>
             </li>

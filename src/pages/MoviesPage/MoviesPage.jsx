@@ -4,6 +4,7 @@ import { getMoviesByQuery } from "../../service/api";
 import s from "./MoviesPage.module.css";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import MovieList from "../../components/MovieList/MovieList";
 
 const MoviesPage = () => {
   const location = useLocation();
@@ -22,7 +23,7 @@ const MoviesPage = () => {
       } catch (error) {
         console.log(error);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     };
     if (query) {
@@ -45,7 +46,6 @@ const MoviesPage = () => {
     if (inputValue.trim() !== query) {
       updateSearchParams("query", inputValue.trim());
     }
-    
   };
 
   return (
@@ -61,7 +61,7 @@ const MoviesPage = () => {
         <button type="submit">Search</button>
       </form>
       {isLoading && <Loader />}
-      <ul>
+      <MovieList>
         {movies?.length > 0
           ? movies?.map((movie) => (
               <li key={movie.id} className={s.movieCard}>
@@ -93,7 +93,7 @@ const MoviesPage = () => {
                 No movies found
               </p>
             )}
-      </ul>
+      </MovieList>
     </div>
   );
 };

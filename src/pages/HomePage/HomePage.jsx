@@ -7,6 +7,7 @@ import s from "./HomePage.module.css";
 import ReactPaginate from "react-paginate";
 import toast from "react-hot-toast";
 import Loader from "../../components/Loader/Loader";
+import MovieList from "../../components/MovieList/MovieList";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -35,7 +36,7 @@ const HomePage = () => {
     <div>
       {isLoading && <Loader />}
       {!isLoading && (
-        <ul className={s.moviesList}>
+        <MovieList className={s.moviesList}>
           {movies.results?.map((movie) => (
             <li key={movie.id} className={s.movieItem}>
               <div className={s.imgContainer}>
@@ -54,7 +55,7 @@ const HomePage = () => {
               </div>
             </li>
           ))}
-        </ul>
+        </MovieList>
       )}
       {!isLoading && (
         <ReactPaginate
